@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["map"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Lat', 'Long', 'Name'],
+          [37.4232, -122.0853, 'Work'],
+          [25.0829388969, 121.557651351, '大直美麗華-美琪蒙古烤肉'],
+          [25.0416033226, 121.543363303, '復興SOGO 山頭火拉麵'],
+          [35.6719036926, 139.765719395, '銀座 木村家']
+        ]);
+
+        /*
+        var data1 = data.addRows([
+          [25.0829388969, 121.557651351, new Date(1977,2,28)],
+          [25.0416033226, 121.543363303, new Date(1962,7,5)],
+        ]); // No date set for Bob.
+        */
+
+        var map = new google.visualization.Map(document.getElementById('map_div'));
+        map.draw(data, {showTip: true});
+        //map.draw(data1, {showTip: true});
+      }
+
+    </script>
+  </head>
+
+  <body>
+    <div id="map_div" style="width: 1000px; height: 1000px"></div>
+  </body>
+</html>
