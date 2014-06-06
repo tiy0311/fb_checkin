@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Placemark>
+    <name>卓樂牛排</name>
+    <description>From:許中光,With:許惟琄,Denis Hse</description>
+    <TimeStamp>
+    	<when>2014-05-31T19:32:12Z</when>
+    </TimeStamp>
+    <Point>
+    	<coordinates>121.55668638784,25.023193684137</coordinates>
+    </Point>
+  </Placemark>
+</kml>

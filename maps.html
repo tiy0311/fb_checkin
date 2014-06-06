@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["map"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Lat', 'Long', 'PlaceName,From,With'],
+          [25.0485526494, 121.532884358, '"稻庭養助うどん專門店",From:"許惟琄",With:"王則予"'],
+          [25.0829388969, 121.557651351, '大直美麗華-美琪蒙古烤肉'],
+          [25.0416033226, 121.543363303, '復興SOGO 山頭火拉麵'],
+          [25.0023927925, 121.510807826, 'Yentl Pasta 洋朵義式廚坊']
+        ]);
+
+        var options = {
+          icons: {
+            default: {
+              normal: 'http://icons.iconarchive.com/icons/icons-land/vista-map-markers/48/Map-Marker-Ball-Azure-icon.png',
+              selected: 'http://icons.iconarchive.com/icons/icons-land/vista-map-markers/48/Map-Marker-Ball-Right-Azure-icon.png'
+            }
+          }
+        };
+
+        var map = new google.visualization.Map(document.getElementById('map_markers_div'));
+
+        
+
+
+
+        map.draw(data, {showTip: true, mapType: 'normal'});
+      }
+
+    </script>
+  </head>
+
+  <body>
+    <div id="map_markers_div" style="width: 800px; height: 500px"></div>
+  </body>
+</html>
