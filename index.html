@@ -178,7 +178,7 @@
                     var logoutControlDiv=document.getElementById("my-logout-control");
                     logoutControlDiv.style.display="block";
 
-                    n+=1;
+                    n=1;
                     console.log('n='+n);
 
                     // when user has been logged in, this block will be triggered.
@@ -214,7 +214,7 @@
                     var loginControlDiv=document.getElementById("my-logout-control");
                     loginControlDiv.style.display="none";
 
-                    n+=1;
+                    n=2;
                     console.log('n='+n);
 
                     console.log("Your logout response:");
@@ -234,7 +234,7 @@
             
                 // 學長給的code:
                 FB.login(function(response) {
-                    n+=1;
+                    n=3;
                     console.log('n='+n);
                     console.log("QQQQQQQlogin-response:"+response); // response在這裡是[object Object]
                     if (response.authResponse) { // 這裡的response.authResponse是[object Object] 
