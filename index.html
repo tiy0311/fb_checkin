@@ -441,7 +441,7 @@
 //          
             var last_tags_length;
             var post_counter = 0;
-            FB.api("/"+userid+"/locations"+"?fields=from,tags,place,created_time&limit=250",
+            FB.api("/v1.0/"+userid+"/locations"+"?fields=from,tags,place,created_time&limit=250",
             function (response) {
 
     
