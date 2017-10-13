@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!--
-    Facebook Code Example
-    @author: LittleQ <littleq0903@gmail.com>
-    @date: 2013-11-23
-    -->
+
     <meta charset="UTF-8">
     <title>Facebook API</title>
 
@@ -225,7 +221,6 @@
             
             $("#my-login-button").click(function(){
             
-                // 學長給的code:
                 FB.login(function(response) {
                     n+=1;
                     console.log('n='+n);
@@ -255,19 +250,6 @@
                 fbget(userid, ACCESS_TOKEN);
             });
 
-            /*
-            $("#from-posts-button").click(function(){
-                console.log('Now you click the posts button.....');
-                var ContainerDiv=document.getElementById("container");
-                ContainerDiv.style.display="block";
-
-                setCookie("ACCESS_TOKEN", ACCESS_TOKEN);    
-
-                console.log('userid: '+userid);             // correct
-                console.log('ACCESS_TOKEN: '+ACCESS_TOKEN); // correct
-                fbget_posts(userid, ACCESS_TOKEN);
-            });
-            */
 
             function setCookie(cname,cvalue)
             {
@@ -276,67 +258,6 @@
                 var expires = "expires="+d.toGMTString();
                 document.cookie = cname+"="+cvalue+"; "+expires;
             }
-
-            /*
-                // 原來寫法
-                FB.login(function(response) {
-                    console.log("login-response:"+response);
-
-                    if (response.authResponse) {
-                        var access_token =   FB.getAuthResponse()['accessToken'];
-                        console.log('Access Token = '+ access_token);
-
-                        FB.api('/me', function(response) {
-                            console.log('Good to see you, ' + response.name + '.');
-                        });
-                    } else {
-                        console.log('User cancelled login or did not fully authorize.');
-                    }
-                }, {scope:'user_friends,user_checkins,user_photos,user_status,friends_status,friends_checkins,friends_photos,read_stream,export_stream'});
-            });
-            */
-            
-            /*    
-                FB.login(function(response){
-                    console.log("login response session");
-                    console.log(response.session);
-                    if (response.session) {
-                        console.log("User is connected to the application.");
-                        var accessToken = response.session.access_token;
-                        alert("User is logged in!");
-                    } else {
-                        alert("User is not logged in!");
-                    
-                    }
-
-                }, {scope: 'user_friends,user_photos,user_tagged_places,user_status,user_actions.news,friends_actions.news,friends_status,freinds_checkins,friends_photos,read_stream''});
-            });
-            */
-
-            /*
-            function login(response, info)
-            {
-                                    n+=1;
-                    console.log('n='+n);
-                console.log("in function login.");
-                console.log("response.authResponse:"+response.authResponse);
-                if (response.authResponse) 
-                {
-                                        n+=1;
-                    console.log('n='+n);
-                    var accessToken = response.authResponse.accessToken;
-                    
-                    userInfo.innerHTML ='<img src="https://graph.facebook.com/' + info.id + '/picture" height="24" width="24">  ' + info.name;
-                                       //+ "<br /> Your Access Token: " + accessToken;
-                   //userInfo.innerHTML ='<img src="https://graph.facebook.com/' + info.id + '/picture" height="24" width="24">  ';
-                    button.innerHTML = '<i class="icon-user icon-white"></i> '+'Log out';
-                    //document.getElementById('other').style.display = "block";
-
-                    ACCESS_TOKEN = accessToken;
-                    console.log("accessToken:"+accessToken);
-                }
-            }
-            */
 
             $("#my-logout-button").click(function(){
                 n=6;
@@ -408,14 +329,7 @@
         function fbget(userid, token) {
 
 
-            var qurl = "pagedata" + "?userid=" + userid + "&token=" + token;
-
-    // var iscache = document.getElementById("cacheCheck").checked;
-    // //console.log("iscache="+ iscache);
-    // if(iscache !== undefined) {
-    //  qurl = qurl + "&iscache="+ iscache;
-    // }
-//          
+            var qurl = "pagedata" + "?userid=" + userid + "&token=" + token;        
             var last_tags_length;
             var post_counter = 0;
             FB.api("/"+userid+"/locations"+"?fields=from,tags,place,created_time&limit=250",
@@ -428,7 +342,6 @@
                     console.log('data.data.length: '+data.data.length);
                     console.log('in fbget_locations and the data is');
                     console.log(data);
-                    //console.dir(response);
 
                     ++N;
                     console.log('NN='+N);   // NN=2
@@ -447,7 +360,6 @@
                     var post_latitude;
 
                     for(var i = 0;i < data.data.length;i++){
-                        //pagemessage.innerHTML = "<center><h2>"+"<a href = \"http://www.facebook.com/"+userid+"\" target=_blank>"+data.data[i].from.name+"</a>"+"</h2></center>";
 
                         data.data[i].created_time = new Date(data.data[i].created_time).toLocaleString();
                         var post_id = data.data[i].id;
@@ -461,21 +373,6 @@
                                 post_tags.push(data.data[i].tags.data[j].name);
                             }
                         }
-/*
-                      // 跳過重複的地標
-                        if(data.data[i].place != null && 
-                            data.data[i].tags != null &&
-                            post_place != data.data[i].place.name && 
-                            post_longitude != data.data[i].place.location.longitude && 
-                            post_latitude != data.data[i].place.location.latitude){
-                            post_place = data.data[i].place.name;
-                            post_longitude = data.data[i].place.location.longitude;
-                            post_latitude = data.data[i].place.location.latitude;
-                        } else {
-                            continue;
-                        }
-*/
-
 
                         if(data.data[i].place != null){
                             post_place = data.data[i].place.name;
@@ -501,7 +398,6 @@
 
                         last_tags_length = post_tags_length;
                     } // end for
-                    //paging(next_page);
                 } // end if(response && !response.error) 
 
                 function paging(next_page){
@@ -516,11 +412,6 @@
                     console.log('data.data.length: '+data.data.length);
                     console.log('in fbget_locations and the data is');
                     console.log(data);
-                    //console.dir(response);
-
-                    //console.log('馬辣place有問題: ');
-                    //console.log(data.data[15].place); 
-
 
                     ++N;
                     console.log('N='+N);
@@ -533,8 +424,6 @@
                     tbody.innerHTML = "";
 
                     for(var i = 0;i < data.data.length;i++){
-                            //pagemessage.innerHTML = "<center><h2>"+"<a href = \"http://www.facebook.com/"+userid+"\" target=_blank>"+data.data[i].from.name+"</a>"+"</h2></center>";
-
                         data.data[i].created_time = new Date(data.data[i].created_time).toLocaleString();
                         var post_id = data.data[i].id;
                         var post_from = data.data[i].from.name;
@@ -577,83 +466,6 @@
 
                 }; // end function paging
             }); // end FB.api function
-            
-            /*
-            if(post_counter>0){
-                    ++N;
-                    console.log('N='+N);
-                    console.log('counter:'+post_counter);
-            console.log('***   next_page:');
-            console.log(next_page);
-            FB.api(next_page,
-            function (response) {
-                console.log('next data:');
-                console.log(response);
-
-                if(response && !response.error) {      
-                    var data = response;
-
-                    console.log('data.data.length: '+data.data.length);
-                    console.log('in fbget_locations and the data is');
-                    console.log(data);
-                    //console.dir(response);
-
-                    //console.log('馬辣place有問題: ');
-                    //console.log(data.data[15].place); 
-
-
-                    ++N;
-                    console.log('N='+N);
-
-                    console.log('paging:');
-                    console.log(data.paging.next);
-
-                    var tbody = document.getElementById("tbody");
-                    tbody.innerHTML = "";
-
-                    for(var i = 0;i < data.data.length;i++){
-                            //pagemessage.innerHTML = "<center><h2>"+"<a href = \"http://www.facebook.com/"+userid+"\" target=_blank>"+data.data[i].from.name+"</a>"+"</h2></center>";
-
-                        data.data[i].created_time = new Date(data.data[i].created_time).toLocaleString();
-                        var post_id = data.data[i].id;
-                        var post_from = data.data[i].from.name;
-
-                        var post_tags = [];
-                        var post_tags_length;
-                        if(data.data[i].tags != null){
-                            post_tags_length = data.data[i].tags.data.length;
-                            for(var j = 0; j < post_tags_length; j++){
-                                post_tags.push(data.data[i].tags.data[j].name);
-                            }
-                        }
-
-                        if(data.data[i].place != null){
-                            var post_place = data.data[i].place.name;
-                            var post_longitude = data.data[i].place.location.longitude;
-                            var post_latitude = data.data[i].place.location.latitude;
-                        } else {
-                            continue;
-                        }
-
-                        post_counter++;
-        
-                        tbody.innerHTML += 
-                        "<tr id = tbody"+i+">"+
-                        "<td style='text-align:center'>"+post_counter+"</td>"+
-                        "<td style='text-align:center'>"+post_id+"</td>"+   // id
-                        "<td style='text-align:center'>"+data.data[i].created_time+"</td>"+   // created_time
-                        "<td style='text-align:center'>"+post_from+"</td>"+   // from
-                        "<td style='text-align:center'>"+post_tags+"</td>"+   // tags
-                        "<td style='text-align:center'>"+post_place+"</td>"+   // place
-                        "<td style='text-align:center'>"+post_longitude+"</td>"+   // longitude
-                        "<td style='text-align:center'>"+post_latitude+"</td>"+   // latitude
-                        "</tr>";
-
-                    } // end for
-                } // end if(response && !response.error)
-            }); // end FB.api functuon
-            }
-            */
         }; // end of function fbget_locations
 </script>
 
